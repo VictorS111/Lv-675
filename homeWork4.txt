@@ -1,0 +1,134 @@
+//Create class Person.
+//    Class Person should consists of
+//             a) two private fields: name and birthYear(the birthday year).
+//             As a type for this field you may use DataTime type.)
+//              b) two properties for access to these fields (only get)
+//              c) default constructor and constructor with 2 parameters
+//              d) methods: -Age() - to calculate the age of person
+//                        - Input() - to input information about person
+//                        -ChangeName() - to change the name of person
+//                           - ToString()
+//                         - Output() - to output information about person(call ToString())
+//                         - operator== (equal by name)
+//    In the method Main() create 6 objects of Person type and input information about them.
+//    Then calculate and write to console the name and Age of each person;
+//     Change the name of persons,
+//     which Age is less then 16, to "Very Young".
+//Output information about all persons.
+//Find and output information about Persons with the same names(use ==)
+
+namespace HomeWork4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            Person n = new Person();
+
+            List<Person> list = new List<Person>();
+            Person person1 = new Person("Andriy", 1989);
+            Person person2 = new Person("Ivan", 1965);
+            Person person3 = new Person("Mykola", 2004);
+            Person person4 = new Person("Kateryna", 1999);
+            Person person5 = new Person("Mariya", 1994);
+            Person person6 = new Person("Oleg", 2008);
+
+            list.Add(person1);
+            list.Add(person2);
+            list.Add(person3);
+            list.Add(person4);
+            list.Add(person5);
+            list.Add(person6);
+
+            Console.WriteLine($"Count of person: {list.Count}");
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i].ToString());
+            }
+            Person l = Person.Input(0);
+            //Person.ChangeName(l);
+
+
+
+            Console.ReadKey();
+
+        }
+
+        class Person
+
+        {
+            private int birthYear;
+            private string name;
+
+
+
+            public string Name
+            {
+                get { return name; }
+
+            }
+            public int BirthYear
+            {
+                get { return birthYear; }
+            }
+
+            public Person() { }
+            public Person(string name, int birthYear)
+            {
+                this.name = name;
+                this.birthYear = birthYear;
+            }
+
+            public static Person Input(int counter)
+            {
+                Console.Write($"Enter the name {counter + 1}-person: ");
+                string name = Console.ReadLine();
+                Console.Write("Enter birth year: ");
+                int birthYear = int.Parse(Console.ReadLine());
+                Person l = new Person(name, birthYear);
+                return l;
+
+            }
+
+            public int Age(int birthYear)
+            {
+                int age = DateTime.Today.Year - birthYear;
+                return age;
+            }
+
+
+            //public static void ChangeName(Person l)
+            //{
+            //    string changeName = "Very Young";
+
+            //    Person personV = l;
+
+            //    if (l.Age < 16)
+            //    {
+            //        string name = changeName;
+            //        Console.WriteLine(name);
+            //    }
+
+            //}
+
+            public static bool operator ==(Person first, Person second)
+            {
+                return (first.name == second.name);
+            }
+
+            public static bool operator !=(Person first, Person second)
+            {
+                return !(first.name == second.name);
+            }
+
+            public override string ToString()
+            {
+                return ($"Name:  - { Name}    Age:   - {Age(birthYear)}");
+
+            }
+        }
+    }
+}
